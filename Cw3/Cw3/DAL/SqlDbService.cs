@@ -46,8 +46,8 @@ namespace Cw3.DAL
                 com.CommandText = " select  Student.IndexNumber, Enrollment.Semester, Studies.Name "
                                     + "From Student JOIN Enrollment ON Student.IdEnrollment = Enrollment.IdEnrollment "
                                     + "JOIN Studies ON Enrollment.IdStudy = Studies.IdStudy "
-                                    + "Where Student.IndexNumber = '"+id+"'";
-
+                                    + "Where Student.IndexNumber = @id";
+                com.Parameters.AddWithValue("id", id); 
                 client.Open();
                 var dr = com.ExecuteReader();
                 if (dr.Read())
