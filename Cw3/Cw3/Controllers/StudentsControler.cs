@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Cw3.Models;
 using Microsoft.AspNetCore.Mvc;
-using Cw3.DAL; 
+using Cw3.DAL;
+using System.Data.SqlClient;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Cw3.Controllers
 {
@@ -29,13 +31,30 @@ namespace Cw3.Controllers
             else if (id==2){
                 return Ok("Malewski"); 
             }
-            return NotFound("Nie znaleziono studenta"); 
+            return NotFound("Nie znaleziono studenta");
         }
 
         [HttpGet]
-        public IActionResult GetStudentByParam(string orderby)
+        public IActionResult GetStudents(string orderby)
         {
-            return Ok(dbService.GetStudents()); 
+            string msg =""; 
+            using (var client = new SqlConnection("Data Source=DESKTOP-LVH8UIJ;Initial Catalog=APBD_DB;Integrated Security=True"))
+            using (var com = new SqlCommand())
+            {
+                com.Connection = client;
+                com.CommandText = "select * from Student";
+
+                client.Open();
+                var dr = com.ExecuteReader(); 
+                while (dr.Read())
+                {
+                    var st = new Student();
+                    st.FirstName = dr["FirstName"].ToString();
+                    msg += st.FirstName+" "; 
+                    
+                }
+            }
+            return Ok(msg); 
         }
 
         [HttpPost]
