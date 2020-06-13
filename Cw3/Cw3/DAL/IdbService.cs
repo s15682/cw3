@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cw3.DAL
 {
-    public interface IdbService
+    public interface IDbService
     {
         public IEnumerable<Student> GetStudents(); 
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Cw3.DAL
 {
-    public class MockDbService : IdbService
+    public class MockDbService : IDbService
     {
         private static IEnumerable<Student> studentsCollection;  
 
@@ -14,9 +14,9 @@ namespace Cw3.DAL
         {
             studentsCollection = new List<Student>
             {
-                new Student{ IdStudent =1, FirstName= "Jan", LastName ="Kowalski"},
-                new Student{ IdStudent =1, FirstName= "Marian", LastName ="Paździoch"},
-                new Student{ IdStudent =1, FirstName= "Ferdynand", LastName ="Kiepski"},
+                new Student{ IndexNumber ="s0001", FirstName= "Jan", LastName ="Kowalski"},
+                new Student{ IndexNumber ="s0002", FirstName= "Marian", LastName ="Paździoch"},
+                new Student{ IndexNumber ="s0003", FirstName= "Ferdynand", LastName ="Kiepski"},
             };
         }
 

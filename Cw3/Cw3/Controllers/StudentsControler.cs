@@ -14,9 +14,9 @@ namespace Cw3.Controllers
     [Route("api/students")]
     public class StudentsControler : ControllerBase
     {
-        private readonly IdbService dbService; 
+        private readonly IDbService dbService; 
 
-        public StudentsControler(IdbService dbService)
+        public StudentsControler(IDbService dbService)
         {
             this.dbService = dbService; 
         }
@@ -37,32 +37,31 @@ namespace Cw3.Controllers
         [HttpGet]
         public IActionResult GetStudents(string orderby)
         {
-            string msg =""; 
-            using (var client = new SqlConnection("Data Source=DESKTOP-LVH8UIJ;Initial Catalog=APBD_DB;Integrated Security=True"))
-            using (var com = new SqlCommand())
-            {
-                com.Connection = client;
-                com.CommandText = "select * from Student";
+            IEnumerable<Student> students = dbService.GetStudents();
+            IEnumerable<String> studentsFullList = createResponseList(students); 
+            return Ok(studentsFullList); 
+        }
 
-                client.Open();
-                var dr = com.ExecuteReader(); 
-                while (dr.Read())
-                {
-                    var st = new Student();
-                    st.FirstName = dr["FirstName"].ToString();
-                    msg += st.FirstName+" "; 
-                    
-                }
+        private IEnumerable<string> createResponseList(IEnumerable<Student> students)
+        {
+            List<string> responseList = new List<string>();
+            int i = 1; 
+            foreach( Student st in students)
+            {
+                responseList.Add( "Lp: "+(i++)+" "+st.ToString());
             }
-            return Ok(msg); 
+            return responseList; 
         }
 
         [HttpPost]
         public IActionResult CreateStudent(Student student) {
             // add to database
             // generate 
+            /*
             student.IndexNumber = $"s{new Random().Next(1, 20000)}";
             return Ok(student); 
+            */
+            return Ok(); 
         }
 
         [HttpPut("{id}")]
