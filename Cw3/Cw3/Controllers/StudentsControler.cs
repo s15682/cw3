@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Cw3.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cw3.Controllers
@@ -36,5 +37,26 @@ namespace Cw3.Controllers
         {
             return $"Kowalski, Malewski, Andrzejewski sortowanie = {orderby}"; 
         }
+
+        [HttpPost]
+        public IActionResult CreateStudent(Student student) {
+            // add to database
+            // generate 
+            student.IndexNumber = $"s{new Random().Next(1, 20000)}";
+            return Ok(student); 
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult PutStudent(int id)
+        {
+            return Ok("Aktualizacja ukończona");
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteStudent(int id)
+        {
+            return Ok("Usuwanie ukończone");
+        }
+
     }
 }
