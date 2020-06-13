@@ -22,15 +22,12 @@ namespace Cw3.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetStudent(int id)
+        public IActionResult GetStudent(string id)
         {
-            if (id == 1)
-            {
-             return Ok("Kowalski");
-            }
-            else if (id==2){
-                return Ok("Malewski"); 
-            }
+            String response;
+            if (dbService.GetStudentEnrollment(id, out response)) {
+                return Ok(response); 
+            } 
             return NotFound("Nie znaleziono studenta");
         }
 

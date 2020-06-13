@@ -36,6 +36,29 @@ namespace Cw3.DAL
             }
             return studentList; 
         }
+
+        public bool GetStudentEnrollment(string id, out string response)
+        {
+            using (var client = new SqlConnection(ConString))
+            using (var com = new SqlCommand())
+            {
+                com.Connection = client;
+                com.CommandText = " select  Student.IndexNumber, Enrollment.Semester, Studies.Name "
+                                    + "From Student JOIN Enrollment ON Student.IdEnrollment = Enrollment.IdEnrollment "
+                                    + "JOIN Studies ON Enrollment.IdStudy = Studies.IdStudy "
+                                    + "Where Student.IndexNumber = '"+id+"'";
+
+                client.Open();
+                var dr = com.ExecuteReader();
+                if (dr.Read())
+                {
+                    response = "Student jest wpisany na semestr " + dr["Semester"] + " studia: " + dr["Name"];
+                    return true; 
+                }
+            }
+            response = ""; 
+            return false; 
+        }
     }
 }
 

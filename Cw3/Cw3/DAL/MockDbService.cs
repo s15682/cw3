@@ -24,5 +24,11 @@ namespace Cw3.DAL
         {
             return studentsCollection; 
         }
+
+        public bool GetStudentEnrollment(string id, out string response)
+        {
+            response = ""; 
+            return false; 
+        }
     }
 }
