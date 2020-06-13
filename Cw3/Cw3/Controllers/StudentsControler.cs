@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Cw3.Models;
 using Microsoft.AspNetCore.Mvc;
+using Cw3.DAL; 
 
 namespace Cw3.Controllers
 {
@@ -11,13 +12,12 @@ namespace Cw3.Controllers
     [Route("api/students")]
     public class StudentsControler : ControllerBase
     {
-        /* multiple endings
-        [HttpGet]
-        public string GetStudents()
+        private readonly IdbService dbService; 
+
+        public StudentsControler(IdbService dbService)
         {
-            return "Kowalski, Malewski, Adrzejewski";
+            this.dbService = dbService; 
         }
-        */
 
         [HttpGet("{id}")]
         public IActionResult GetStudent(int id)
@@ -33,9 +33,9 @@ namespace Cw3.Controllers
         }
 
         [HttpGet]
-        public string GetStudentByParam(string orderby)
+        public IActionResult GetStudentByParam(string orderby)
         {
-            return $"Kowalski, Malewski, Andrzejewski sortowanie = {orderby}"; 
+            return Ok(dbService.GetStudents()); 
         }
 
         [HttpPost]
