@@ -10,26 +10,22 @@ namespace Cw3.Models
         public string IndexNumber { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        //public int EnrolmentId { get; set; }
-        public int IdStudy { get; set; }
-
-        public int Semester { get; set; }
+        public int IdEnrollment { get; set; }
 
 
-        public Student (string index, string name, string lastName, int idstudy, int semester)
+        public Student (string index, string name, string lastName, int idEnrollment)
         {
             IndexNumber = index;
             FirstName = name;
             LastName = lastName;
-            IdStudy = idstudy;
-            Semester = semester; 
+            IdEnrollment = idEnrollment;
         }
 
         public Student() { }
 
         public override string ToString()
         {
-            return FirstName + " " + LastName + " " + IndexNumber + " " + IdStudy + " " + Semester; 
+            return FirstName + " " + LastName + " " + IndexNumber + " " + IdEnrollment; 
         }
 
     }

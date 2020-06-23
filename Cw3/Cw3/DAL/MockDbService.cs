@@ -30,5 +30,15 @@ namespace Cw3.DAL
             response = ""; 
             return false; 
         }
+
+        public IEnumerable<Studies> GetStudies()
+        {
+            throw new NotImplementedException();
+        }
+
+        Studies IDbService.GetStudy(string name)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

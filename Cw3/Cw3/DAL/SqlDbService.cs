@@ -18,9 +18,8 @@ namespace Cw3.DAL
             using (var com = new SqlCommand())
             {
                 com.Connection = client;
-                com.CommandText = " select Student.FirstName, Student.LastName, Student.IndexNumber, Student.BirthDate, Studies.Name, Enrollment.Semester "
-                                    + "From Student JOIN Enrollment ON Student.IdEnrollment = Enrollment.IdEnrollment "
-                                    + "JOIN Studies ON Enrollment.IdStudy = Studies.IdStudy;";
+                com.CommandText = " select Student.FirstName, Student.LastName, Student.IndexNumber, Student.IdEnrollment "
+                                    + "From Student;";
 
                 client.Open();
                 var dr = com.ExecuteReader();
@@ -29,8 +28,7 @@ namespace Cw3.DAL
                     studentList.Add(new Student(dr["IndexNumber"].ToString(),
                                                 dr["FirstName"].ToString(),
                                                 dr["LastName"].ToString(),
-                                                dr["Name"].ToString(),
-                                                (int)dr["Semester"]
+                                                (int)dr["IdEnrollment"]
                                                 )); 
                 }
             }
@@ -59,26 +57,23 @@ namespace Cw3.DAL
             response = ""; 
             return false; 
         }
-    }
-}
 
-/*
- * string msg =""; 
-            using (var client = new SqlConnection("Data Source=DESKTOP-LVH8UIJ;Initial Catalog=APBD_DB;Integrated Security=True"))
+        public Studies GetStudy(string name)
+        {
+            using (var client = new SqlConnection(ConString))
             using (var com = new SqlCommand())
             {
                 com.Connection = client;
-                com.CommandText = "select * from Student";
-
+                com.CommandText = " select Studies.IdStudy, Studies.Name from Studies Where Studies.Name = @name; "; 
+                com.Parameters.AddWithValue("name", name);
                 client.Open();
-                var dr = com.ExecuteReader(); 
-                while (dr.Read())
+                var dr = com.ExecuteReader();
+                if (dr.Read())
                 {
-                    var st = new Student();
-                    st.FirstName = dr["FirstName"].ToString();
-                    msg += st.FirstName+" "; 
-                    
+                    return new Studies((int)dr["IdStudy"], dr["Name"].ToString());
                 }
             }
-            return Ok(msg); 
-*/
+            return null; 
+        }
+    }
+}

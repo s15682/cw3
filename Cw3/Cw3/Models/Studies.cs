@@ -19,8 +19,6 @@ namespace Cw3.Models
 
         public Studies() { }
 
-        public Studies GetStudiesID()
-
         public override string ToString()
         {
             return Name; 
