@@ -11,12 +11,6 @@ namespace Cw3.Controllers
     [ApiController]
     public class EnrollmentsController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult GetStudents(string orderby)
-        {
-            return Ok("coś");
-        }
-
         [HttpPost]
         public IActionResult EnrollStudent()
         {

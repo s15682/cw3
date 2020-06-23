@@ -11,17 +11,17 @@ namespace Cw3.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         //public int EnrolmentId { get; set; }
-        public string StudyName { get; set; }
+        public int IdStudy { get; set; }
 
         public int Semester { get; set; }
 
 
-        public Student (string index, string name, string lastName, string studyName, int semester)
+        public Student (string index, string name, string lastName, int idstudy, int semester)
         {
             IndexNumber = index;
             FirstName = name;
             LastName = lastName;
-            StudyName = studyName;
+            IdStudy = idstudy;
             Semester = semester; 
         }
 
@@ -29,7 +29,7 @@ namespace Cw3.Models
 
         public override string ToString()
         {
-            return FirstName + " " + LastName + " " + IndexNumber + " " + StudyName + " " + Semester; 
+            return FirstName + " " + LastName + " " + IndexNumber + " " + IdStudy + " " + Semester; 
         }
 
     }
