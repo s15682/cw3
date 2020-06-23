@@ -1,4 +1,5 @@
-﻿using Cw3.Models;
+﻿using Cw3.DTOs.Requests;
+using Cw3.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,21 @@ namespace Cw3.DAL
         }
 
         Studies IDbService.GetStudy(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        Enrollment IDbService.EnrollStudent(EnrollStudentRequest request, int idStudy)
+        {
+            throw new NotImplementedException();
+        }
+
+        Enrollment IDbService.GetEnrollment(string studyName, int semester)
+        {
+            throw new NotImplementedException();
+        }
+
+        Enrollment IDbService.Promote(Enrollment enroll)
         {
             throw new NotImplementedException();
         }

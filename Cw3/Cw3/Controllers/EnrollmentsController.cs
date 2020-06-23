@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Cw3.DAL;
 using Cw3.DTOs.Requests;
+using Cw3.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,8 +25,13 @@ namespace Cw3.Controllers
         public IActionResult EnrollStudent(EnrollStudentRequest request)
         {
             var studies = dbService.GetStudy(request.Studies);
-            if (studies == null) return BadRequest("Nie znaleziono kierunku studiów o nazwie " + request.Studies); 
-            return Ok(); 
+            if (studies == null) return BadRequest("Nie znaleziono kierunku studiów o nazwie " + request.Studies);
+            Enrollment enroll = dbService.EnrollStudent(request, studies.IdStudy);
+            if (enroll == null)
+            {
+                return BadRequest(); 
+            }
+            return Ok(enroll); 
         }
 
 

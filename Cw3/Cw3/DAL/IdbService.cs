@@ -1,4 +1,5 @@
-﻿using Cw3.Models;
+﻿using Cw3.DTOs.Requests;
+using Cw3.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,12 +9,15 @@ namespace Cw3.DAL
 {
     public interface IDbService
     {
-        public IEnumerable<Student> GetStudents();
+        IEnumerable<Student> GetStudents();
 
-        public Studies GetStudy(string name);
+        Studies GetStudy(string name);
 
         bool GetStudentEnrollment(string id, out string response);
 
+        Enrollment EnrollStudent(EnrollStudentRequest request, int idStudy);
 
+        Enrollment GetEnrollment(string studyName, int semester);
+        Enrollment Promote(Enrollment enroll);
     }
 }
